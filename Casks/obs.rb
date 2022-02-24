@@ -1,6 +1,6 @@
 cask "obs" do
-  version "27.1.3"
-  sha256 "efb1dce8d43ae2dbb1e0be8514c808b30d4e9191cc9a6dfc015534861f80ba43"
+  version "27.2.1"
+  sha256 "21bdd4cb8c0e766c7e63741c46667a2a0b0a93810cad6afa15ac7e157560fab2"
 
   url "https://cdn-fastly.obsproject.com/downloads/obs-mac-#{version}.dmg"
   name "OBS"
@@ -9,15 +9,16 @@ cask "obs" do
 
   livecheck do
     url :homepage
-    regex(%r{href=.*?/obs-mac-(\d+(?:\.\d+)*)\.dmg}i)
+    regex(%r{href=.*?/obs[._-]mac[._-]v?(\d+(?:\.\d+)+)\.dmg}i)
   end
 
   auto_updates true
 
   app "OBS.app"
 
+  uninstall delete: "/Library/CoreMediaIO/Plug-Ins/DAL/obs-mac-virtualcam.plugin"
+
   zap trash: [
-    "/Library/CoreMediaIO/Plug-Ins/DAL/obs-mac-virtualcam.plugin",
     "~/Library/Application Support/obs-studio",
     "~/Library/Preferences/com.obsproject.obs-studio.plist",
     "~/Library/Saved Application State/com.obsproject.obs-studio.savedState",
